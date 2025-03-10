@@ -1,0 +1,28 @@
+name: Ma super ci/cd
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+# build-and-test c'est un nom que je choisi de donné j aurais pu mettre toto
+  build-and-test: 
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Configurer node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Installation des dépendances
+        run: yarn install
+
+      - name: Lancement des tests unitaires
+        run: yarn test
+
+      - name: Build de l'appli
+        run: yarn build
