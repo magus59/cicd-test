@@ -1,14 +1,16 @@
-name: Ma super ci/cd
+name: Ma super CI/CD
 
 on:
   push:
-    branches: [ main ]
+   branches: [ main ]
+
 
 jobs:
-  build-and-test: 
+#je donne un nom
+  build-and-test:
     runs-on: ubuntu-latest
 
-    steps: 
+    steps:
       - name: Checkout du code
         uses: actions/checkout@v3
 
@@ -17,33 +19,27 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Installation des dépendances
-        run: yarn install
+      - name: installation des dépendence
+        run: npm install
 
-      - name: Lancement des tests unitaires
-        run: yarn test
+      - name: lancement des tests
+        run: npm run test
 
       - name: Build de l'appli
-        run: yarn build
+        run : npm run build
 
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
-    steps:
+    steps: 
       - name: Checkout du code
         uses: actions/checkout@v3
 
-      - name: Vérification du dossier de build
-        run: ls -la ./dist  # Assurez-vous que le dossier existe
-
-      - name: Déploiement en GitHub Pages
+      - name: Deploiement en github page
         uses: peaceiris/actions-gh-pages@v3
         with: 
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # ou ./build si nécessaire
-
-    
-    
-  
+          publish_dir: ./dist
+      
