@@ -1,7 +1,7 @@
 <template>
   <div>
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="salut"/>
+    <HelloWorld msg="salut les musclee test 2"/>
   </div>
 </template>
 
